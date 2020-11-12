@@ -4,9 +4,12 @@
 # pylint: disable="import-error"
 from current_cmd_a import CurrentCMD_A
 from current_cmd_b import CurrentCMD_B
+from command_line_a_creator import CommandLineACreator
+from command_line_b_creator import CommandLineBCreator
+
 from javascript_handler import JavascriptHandler
-# 3rd party imports
 from serializer import Serializer
+# 3rd party imports
 from esprima import tokenize, parseScript
 from plantuml import PlantUML
 from re import search
@@ -19,8 +22,8 @@ class InputHandler():
     """Handles User Commands that require action beyond basic cmd output"""
 
     def __init__(self):
-        self.cmd_a = CurrentCMD_A()
-        self.cmd_b = CurrentCMD_B()
+        self.cmd_a = CommandLineACreator().create_cmd()
+        self.cmd_b = CommandLineBCreator().create_cmd()
         # self.all_javascript = str
 
     # Ethan's
@@ -164,7 +167,7 @@ class InputHandler():
             output_intro = "Make sure you select at least one "
             output_error = "Javascript file. There was a type error: "
             type_error_output = output_intro + output_error
-                               
+
             if is_ethans:
                 try:
                     my_data = self.is_file_or_dir_b(current_cmd.user_args)
@@ -198,14 +201,16 @@ class InputHandler():
 
 if __name__ == "__main__":
     input_handler = InputHandler()
-    current_cmd = input_handler.cmd_b  # Default CMD is Ethan's
+    cmd_b = CommandLineBCreator().create_cmd()  # Default CMD is Ethan's
+    cmd_a = CommandLineACreator().create_cmd()
     # print(argv[0]) # src\input_handler.py 0 or 1
     if len(argv) > 1:
         if argv[1] == "0":
             input_handler.cmd_looper(input_handler,
-                input_handler.cmd_a, "Running Azez's cmd")  # Azez CMD
+                cmd_a, "Running Azez's cmd")
         if argv[1] == "1":
             input_handler.cmd_looper(input_handler,
-                input_handler.cmd_b, "Running Ethan's cmd")  # Ethan CMD
+                cmd_b, "Running Ethan's cmd")
 
-    input_handler.cmd_looper(input_handler, current_cmd, "Running Ethan's cmd")
+    input_handler.cmd_looper(input_handler, cmd_b, "Running Ethan's cmd")
+    input_handler.cmd_looper(input_handler, cmd_b, "Running Ethan's cmd")
