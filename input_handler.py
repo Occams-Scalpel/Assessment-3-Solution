@@ -1,17 +1,11 @@
 
 # Input Handler
-
-# pylint: disable="import-error"
-from current_cmd_a import CurrentCMD_A
-from current_cmd_b import CurrentCMD_B
 from command_line_a_creator import CommandLineACreator
 from command_line_b_creator import CommandLineBCreator
-
 from javascript_handler import JavascriptHandler
 from serializer import Serializer
+
 # 3rd party imports
-from esprima import tokenize, parseScript
-from plantuml import PlantUML
 from re import search
 from os import walk, path
 from execjs import get
@@ -212,5 +206,4 @@ if __name__ == "__main__":
             input_handler.cmd_looper(input_handler,
                 cmd_b, "Running Ethan's cmd")
 
-    input_handler.cmd_looper(input_handler, cmd_b, "Running Ethan's cmd")
     input_handler.cmd_looper(input_handler, cmd_b, "Running Ethan's cmd")
