@@ -6,7 +6,7 @@ import sys
 
 class TestCurrentCmdB(unittest.TestCase):
     def setUp(self):
-        self.test_cmd = CurrentCMD_B()
+        self.test_cmd = CurrentCMD_B("Runner Message")
 
     def test_create_uml_sets_command(self):
         self.test_cmd.do_create_uml("args")

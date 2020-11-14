@@ -15,9 +15,9 @@ from sys import argv
 class InputHandler():
     """Handles User Commands that require action beyond basic cmd output"""
 
-    def __init__(self):
-        self.cmd_a = CommandLineACreator().create_cmd()
-        self.cmd_b = CommandLineBCreator().create_cmd()
+    def __init__(self, new_cmd_a, new_cmd_b):
+        self.cmd_a = new_cmd_a
+        self.cmd_b = new_cmd_b
         # self.all_javascript = str
 
     # Ethan's
@@ -138,8 +138,8 @@ class InputHandler():
 
         my_javascript.create_puml()
 
-    def cmd_looper(self, input_handler, current_cmd, output):
-        current_cmd.cmdloop(intro=output)
+    def cmd_looper(self, input_handler, current_cmd):
+        current_cmd.cmdloop(intro=current_cmd.output)
 
         user_command = current_cmd.current_command
         is_ethans = current_cmd == input_handler.cmd_b
@@ -152,7 +152,7 @@ class InputHandler():
             else:
                 current_cmd = input_handler.cmd_b
             current_cmd.current_command = ""
-            self.cmd_looper(input_handler, current_cmd, "CMD Switched")
+            self.cmd_looper(input_handler, current_cmd)
 
         # JS file checker
         if user_command == "do_create_uml":
@@ -176,7 +176,7 @@ class InputHandler():
                 except TypeError as t:
                     output = type_error_output + str(t)
 
-            self.cmd_looper(input_handler, current_cmd, output)
+            self.cmd_looper(input_handler, current_cmd)
 
         if user_command == "do_deserialize":
             my_serializer = Serializer()  # WRAP in try / catch
@@ -186,7 +186,7 @@ class InputHandler():
             else:
                 my_serializer.deserializer_a(deserialize_args)
 
-            self.cmd_looper(input_handler, current_cmd, "")
+            self.cmd_looper(input_handler, current_cmd)
 
         # Quitter
         if user_command == "do_quit":
@@ -194,16 +194,15 @@ class InputHandler():
 
 
 if __name__ == "__main__":
-    input_handler = InputHandler()
     cmd_b = CommandLineBCreator().create_cmd()  # Default CMD is Ethan's
     cmd_a = CommandLineACreator().create_cmd()
+    input_handler = InputHandler(cmd_a, cmd_b)
+
     # print(argv[0]) # src\input_handler.py 0 or 1
     if len(argv) > 1:
         if argv[1] == "0":
-            input_handler.cmd_looper(input_handler,
-                cmd_a, "Running Azez's cmd")
+            input_handler.cmd_looper(input_handler, cmd_a)
         if argv[1] == "1":
-            input_handler.cmd_looper(input_handler,
-                cmd_b, "Running Ethan's cmd")
+            input_handler.cmd_looper(input_handler, cmd_b)
 
-    input_handler.cmd_looper(input_handler, cmd_b, "Running Ethan's cmd")
+    input_handler.cmd_looper(input_handler, cmd_b)

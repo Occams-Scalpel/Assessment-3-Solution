@@ -3,13 +3,7 @@ import unittest
 # Import test files
 from test_cmd_a import TestCurrentCmdA
 from test_cmd_b import TestCurrentCmdB
-"""
-# Import classes to be tested
-from input_handler import InputHandler
-from javascript_handler import JavascriptHandler
-from dot_formatter import DotFormatter
-from image_converter import ImageConverter
-"""
+
 
 def suite():
     theSuite = unittest.TestSuite()
