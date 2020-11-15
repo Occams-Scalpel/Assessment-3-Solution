@@ -37,6 +37,7 @@ class InputHandler():
             return self.validate_javascript_b(all_js_files)
 
     def validate_javascript_b(self, js_file_list):
+
         node_runner = get('Node')
 
         for a_single_file in js_file_list:
@@ -163,18 +164,12 @@ class InputHandler():
             type_error_output = output_intro + output_error
 
             if is_ethans:
-                try:
-                    my_data = self.is_file_or_dir_b(current_cmd.user_args)
-                    self.handle_javascript(my_data, "b")
-                except TypeError as type_error:
-                    output = type_error_output + str(type_error)
+                my_data = self.is_file_or_dir_b(current_cmd.user_args)
+                self.handle_javascript(my_data, "b")
 
             else:
-                try:
-                    my_data = self.is_file_or_dir_a(current_cmd.user_args)
-                    self.handle_javascript(my_data, "a")
-                except TypeError as t:
-                    output = type_error_output + str(t)
+                my_data = self.is_file_or_dir_a(current_cmd.user_args)
+                self.handle_javascript(my_data, "a")
 
             self.cmd_looper(input_handler, current_cmd)
 

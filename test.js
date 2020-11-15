@@ -2,11 +2,11 @@ class Cat {
     constructor (catName, catAge) {
       this.catName = ''
       this.catAge = 20
+      this.lives_left = 9
     }
   
     speak (words) {
       let dog = new Dog('Name', 123)
-  
       return 34
     }
   
